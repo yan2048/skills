@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+
+# WorkBuddy 项目记忆（本地数据，不发布）
+.workbuddy/
+
+# Node / 脚本运行产物
+node_modules/
+__pycache__/
+*.log
+.env
