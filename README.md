@@ -1,6 +1,6 @@
 # WorkBuddy Skills
 
-个人开源的 WorkBuddy Skill 合集，每周持续更新（新增 skill 或修复问题）。
+个人开源的 WorkBuddy Skill 合集，每周持续更新（用于解决常见问题）。
 
 ## 简介
 
