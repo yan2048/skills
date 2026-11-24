@@ -1,0 +1,26 @@
+name: skill-lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # 当前只拦截 error（结构性问题）；等所有 skill 补齐推荐章节后
+      # 再改成 --strict，把 warning 也纳入门禁。
+      - name: Lint all skills
+        run: python3 skills/skill-lint/scripts/lint_skills.py skills/
+
+      - name: Lint changed skill (summary only)
+        if: always()
+        run: python3 skills/skill-lint/scripts/lint_skills.py skills/ --quiet

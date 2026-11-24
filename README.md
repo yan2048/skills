@@ -10,8 +10,12 @@
 
 ```
 skills/
-└── example-skill/        # 每个 skill 一个目录
-    └── SKILL.md          # skill 定义（含 YAML frontmatter）
+├── example-skill/        # 每个 skill 一个目录
+│   └── SKILL.md          # skill 定义（含 YAML frontmatter）
+└── skill-lint/           # 较复杂的 skill 可带子目录
+    ├── SKILL.md
+    ├── references/       # 拆分出的长文档（按需读取）
+    └── scripts/          # 可直接运行的脚本
 ```
 
 ## 使用方式
@@ -23,6 +27,7 @@ skills/
 | Skill | 说明 | 状态 |
 |-------|------|------|
 | [example-skill](skills/example-skill/) | skill 编写模板与结构示例 | ✅ 可用 |
+| [skill-lint](skills/skill-lint/) | SKILL.md 规范校验器，含 Python 脚本与 CI | ✅ 可用 |
 
 ## 编写规范
 
@@ -31,6 +36,16 @@ skills/
 - description 应写清触发场景与关键词，便于 AI 正确路由
 - 复杂流程可拆分为子文档（`references/`）或脚本（`scripts/`）
 - 内容以「可执行的工作流 + 具体命令 + 边界约束」为主，避免空泛描述
+
+## 质量校验
+
+提交前跑一遍结构校验（只依赖 Python 标准库）：
+
+```bash
+python3 skills/skill-lint/scripts/lint_skills.py skills/
+```
+
+有 `ERROR` 必须修；`WARN` 自行判断，想连警告一起卡住用 `--strict`。规则说明见 [skills/skill-lint/references/rules.md](skills/skill-lint/references/rules.md)。CI 配置在 `.github/workflows/skill-lint.yml`。
 
 ## Roadmap
 
